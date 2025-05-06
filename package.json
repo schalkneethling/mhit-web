@@ -15,6 +15,6 @@
     "cssnano": "^7.0.6"
   },
   "devDependencies": {
-    "astro-integration-kit": "^0.0.9"
+    "astro-integration-kit": "^0.18.0"
   }
 }
