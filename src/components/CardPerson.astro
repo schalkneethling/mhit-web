@@ -1,0 +1,57 @@
+---
+import Picture from "./Picture.astro";
+
+const { person } = Astro.props;
+---
+
+<div class="card-person">
+  <div class="card-person-image">
+    <Picture pictureSrc={person.pictureSrc} pictureAlt={person.name} />
+  </div>
+  <div class="card-person-content">
+    <slot name="card-person-name" />
+    <p class="card-person-role">{person.type}</p>
+    {
+      person.description && (
+        <p class="card-person-description">{person.description}</p>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .card-person {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-default);
+  }
+
+  .card-person-image {
+    flex: 0 0 max-content;
+  }
+
+  .card-person-image :global(img) {
+    border-radius: var(--border-radius-circle);
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .card-person-content {
+    display: flex;
+    flex: 1 1 max-content;
+    flex-direction: column;
+  }
+
+  :global(.card-person-name) {
+    font-size: var(--typography-size-small-medium);
+  }
+
+  .card-person-role {
+    font-size: var(--typography-size-default);
+    margin-bottom: 0;
+  }
+
+  .card-person-description {
+    font-size: 0.875rem;
+  }
+</style>

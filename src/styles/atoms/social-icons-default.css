@@ -1,0 +1,31 @@
+.default-discord::before {
+  mask-image: url("/social-icon-packs/default/discord.svg");
+}
+
+.default-facebook::before {
+  mask-image: url("/social-icon-packs/default/facebook.svg");
+}
+
+.default-github::before {
+  mask-image: url("/social-icon-packs/default/github.svg");
+}
+
+.default-instagram::before {
+  mask-image: url("/social-icon-packs/default/instagram.svg");
+}
+
+.default-linkedin::before {
+  mask-image: url("/social-icon-packs/default/linkedin.svg");
+}
+
+.default-mastodon::before {
+  mask-image: url("/social-icon-packs/default/mastodon.svg");
+}
+
+.default-slack::before {
+  mask-image: url("/social-icon-packs/default/slack.svg");
+}
+
+.default-x::before {
+  mask-image: url("/social-icon-packs/default/x.svg");
+}

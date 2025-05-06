@@ -1,0 +1,6 @@
+.player-icon::before {
+  content: "";
+  display: block;
+  height: 2rem;
+  width: 2rem;
+}

@@ -1,0 +1,106 @@
+---
+import { customProperties } from "../utils/custom-properties";
+import Config from "virtual:indiecaster/config";
+
+const { podcastPlayers } = Config.options;
+const { colorPrimaryColorLight } = customProperties;
+---
+
+<section
+  aria-labelledby="subscribe-section-heading"
+  class="base-container-padding subscribe-section"
+>
+  <h3 class="subscribe-section-heading" id="subscribe-section-heading">
+    Available On These Platforms
+  </h3>
+  <ul class="reset-list podcast-players">
+    {
+      podcastPlayers.map((player) => (
+        <li class="podcast-player">
+          <a
+            class:list={["player-icon", player.icon]}
+            href={player.url}
+            rel="external noopener noreferrer"
+            target="_blank"
+          >
+            <span class="visually-hidden">
+              {player.name === "RSS"
+                ? "Subscribe with RSS"
+                : `Listen and subscribe on ${player.name}`}
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style define:vars={{ colorPrimaryColorLight }}>
+  .subscribe-section {
+    background-color: var(--colorPrimaryColorLight);
+    padding-bottom: var(--spacing-medium);
+  }
+
+  @media only screen and (min-width: 47.9375rem) {
+    .subscribe-section {
+      padding: var(--spacing-medium);
+    }
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .subscribe-section {
+      padding: var(--spacing-wide) var(--spacing-medium);
+    }
+  }
+
+  .subscribe-section-heading {
+    font-size: var(--typography-size-small-medium);
+    font-weight: normal;
+    margin-bottom: var(--spacing-default);
+    text-align: center;
+  }
+
+  @media only screen and (min-width: 47.9375rem) {
+    .subscribe-section-heading {
+      font-size: var(--typography-size-medium);
+      margin: var(--spacing-medium);
+      margin-top: 0;
+    }
+  }
+
+  .podcast-players {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-default);
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 80%;
+    padding: 0;
+  }
+
+  @media only screen and (min-width: 47.9375rem) {
+    .podcast-players {
+      max-width: 37.5rem;
+    }
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .podcast-players {
+      justify-content: center;
+    }
+  }
+
+  @media only screen and (min-width: 83.6875rem) {
+    .podcast-players {
+      flex-wrap: nowrap;
+      max-width: 83.6875rem;
+    }
+  }
+
+  @media only screen and (min-width: 47.9375rem) {
+    .podcast-player {
+      flex: 1 1 20%;
+    }
+  }
+</style>

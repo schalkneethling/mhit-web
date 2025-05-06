@@ -1,0 +1,15 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { colorPrimaryColor } = Config.options;
+---
+
+<div class="theme">
+  <slot />
+</div>
+<style is:global define:vars={{ colorPrimaryColor }}>
+  .theme a:link,
+  .theme a:visited {
+    color: var(--colorPrimaryColor);
+  }
+</style>

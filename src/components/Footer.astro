@@ -1,0 +1,52 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { colorPrimaryColor, podcastName, socialMedia } = Config.options;
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="base-container-padding page-footer-container">
+  <div class="girdle page-footer">
+    <ul class="reset-list podcast-socials">
+      {
+        socialMedia.map((social) => (
+          <li class="podcast-social">
+            <a
+              class:list={["social-icon", social.icon]}
+              href={social.url}
+              rel="external noopener noreferrer"
+              target="_blank"
+            >
+              <span class="visually-hidden">
+                {`Share your thoughts with us on ${social.name}`}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p>{`${podcastName} ${currentYear}`}</p>
+  </div>
+</footer>
+
+<style define:vars={{ colorPrimaryColor }}>
+  .page-footer-container {
+    background-color: var(--colorPrimaryColor);
+    color: var(--color-neutral-inverted);
+    padding-top: var(--spacing-wide);
+    text-align: center;
+  }
+
+  .podcast-socials {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-medium);
+    margin-bottom: var(--spacing-medium);
+    padding: 0;
+  }
+
+  .social-icon::before {
+    background-color: var(--color-neutral-inverted);
+  }
+</style>

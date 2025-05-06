@@ -1,0 +1,20 @@
+---
+import "../styles/reset.css";
+import "../styles/custom-properties.css";
+
+import "../styles/base.css";
+
+interface Props {
+  metaDescription: string;
+  metaPageTitle: string;
+  podcastName: string;
+}
+
+const { metaDescription, metaPageTitle, podcastName } = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<title>{metaPageTitle} - {podcastName}</title>
+<meta name="description" content={metaDescription} />

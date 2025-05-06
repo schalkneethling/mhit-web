@@ -1,0 +1,49 @@
+---
+const { episode } = Astro.props;
+const backgroundImg = episode.artwork
+  ? `url(/episode-artwork/${episode.artwork}.webp)`
+  : "url(/episode-artwork/episode-default.webp)";
+---
+
+<div class="podcast-player-default-container">
+  <audio controls preload="metadata">
+    <source src={`/audio/episodes/${episode.url}.mp3`} type="audio/mpeg" />
+    Your browser does not support the audio element. Please <a
+      href={`/audio/episodes/${episode.url}.mp3`}
+      download>download the episode</a
+    > instead.
+  </audio>
+</div>
+
+<style define:vars={{ backgroundImg }}>
+  .podcast-player-default-container {
+    align-items: flex-end;
+    background-color: var(--color-neutral-20);
+    border-radius: var(--border-radius-pill);
+    display: flex;
+    min-height: 40vh;
+    justify-content: center;
+    margin: var(--spacing-wide) auto;
+    overflow: hidden;
+    padding: var(--spacing-medium);
+    position: relative;
+    width: 100%;
+  }
+
+  .podcast-player-default-container::after {
+    background-image: var(--backgroundImg);
+    background-size: cover;
+    content: "";
+    display: block;
+    height: 100%;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .podcast-player-default-container audio {
+    width: 80%;
+    z-index: 99;
+  }
+</style>

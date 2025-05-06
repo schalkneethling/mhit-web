@@ -1,0 +1,93 @@
+---
+import Config from "virtual:indiecaster/config";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CardEpisode from "../components/CardEpisode.astro";
+import Subscribe from "../components/Subscribe.astro";
+import AboutElevatorPitch from "../components/AboutElevatorPitch.astro";
+
+const {
+  episodesListingHeading,
+  episodesListingLead,
+  metaDefaultDescription,
+  podcastName,
+} = Config.options;
+const allEpisodes = await Astro.glob("../pages/episodes/*.md");
+---
+
+<BaseLayout
+  metaDescription={metaDefaultDescription}
+  metaPageTitle={podcastName}
+>
+  <main>
+    <article class="girdle">
+      <header class="episodes-listing-header">
+        <h1>{episodesListingHeading}</h1>
+        <p>{episodesListingLead}</p>
+      </header>
+      <ul class="reset-list episodes-list">
+        {
+          allEpisodes.map((episode) => (
+            <li class="episode">
+              <CardEpisode
+                episodeUrl={episode.url}
+                frontMatter={episode.frontmatter}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+    <Subscribe />
+    <AboutElevatorPitch />
+  </main>
+</BaseLayout>
+
+<style>
+  .episodes-listing-header {
+    margin: var(--spacing-xwide) 0 var(--spacing-wide);
+  }
+
+  .episodes-listing-header p {
+    font-size: var(--typography-size-small-medium);
+    max-width: 100ch;
+  }
+
+  .episodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-medium);
+    margin-bottom: var(--spacing-wide);
+    padding: 0 var(--spacing-default);
+  }
+
+  .episode {
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 43.9375rem) {
+    .episodes-list {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      padding: 0;
+    }
+
+    .episode {
+      display: flex;
+      flex: 1 1 45%;
+      flex-direction: column;
+    }
+  }
+
+  @media only screen and (min-width: 83.6875rem) {
+    .episodes-list {
+      gap: var(--spacing-wide);
+      justify-content: flex-start;
+    }
+
+    .episode {
+      flex: 0 1 30%;
+    }
+  }
+</style>

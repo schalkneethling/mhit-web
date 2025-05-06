@@ -1,0 +1,78 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { episodeUrl, frontMatter } = Astro.props;
+const { description, episodeArtwork, pubDate, title } = frontMatter;
+const { colorPrimaryColorDark, colorSecondaryColorLight } = Config.options;
+---
+
+<div class="episode-card-image">
+  <img
+    src={`/episode-artwork/${episodeArtwork.src}.png`}
+    height="200"
+    width="300"
+    alt={episodeArtwork.alt || ""}
+  />
+</div>
+<div class="episode-card-content">
+  <div class="episode-card-header">
+    <h2 class="episode-card-title">
+      <a href={episodeUrl}>{title}</a>
+    </h2>
+    <p class="episode-card-description">{description}</p>
+  </div>
+  <p class="episode-card-pubdate">{pubDate}</p>
+</div>
+
+<style define:vars={{ colorPrimaryColorDark, colorSecondaryColorLight }}>
+  .episode-card-image img {
+    border-top-left-radius: var(--border-radius-pill);
+    border-top-right-radius: var(--border-radius-pill);
+    height: auto;
+    width: 100%;
+  }
+
+  .episode-card-content {
+    background-color: var(--colorSecondaryColorLight);
+    border-bottom-left-radius: var(--border-radius-pill);
+    border-bottom-right-radius: var(--border-radius-pill);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    padding: var(--spacing-default);
+    padding-top: 0;
+  }
+
+  .episode-card-title {
+    font-size: var(--typography-size-medium);
+    margin: var(--spacing-default) 0;
+  }
+
+  .episode-card-title a {
+    color: var(--colorPrimaryColorDark);
+    text-decoration: none;
+  }
+
+  .episode-card-description {
+    margin-bottom: var(--spacing-narrow);
+  }
+
+  .episode-card-pubdate {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-narrow);
+    margin-top: var(--spacing-default);
+    margin-bottom: 0;
+  }
+
+  .episode-card-pubdate::before {
+    background-color: var(--colorPrimaryColorDark);
+    content: "";
+    display: block;
+    height: 1.5rem;
+    mask-image: url("/icons/default/calendar.svg");
+    mask-size: cover;
+    width: 1.5rem;
+  }
+</style>

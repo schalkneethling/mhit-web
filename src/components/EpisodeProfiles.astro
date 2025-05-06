@@ -1,0 +1,66 @@
+---
+import CardPerson from "./CardPerson.astro";
+import Config from "virtual:indiecaster/config";
+
+const { colorPrimaryColor } = Config.options;
+const { frontMatter } = Astro.props;
+const featuredGuest = {
+  name: frontMatter.guest,
+  pictureSrc: `/profile-images/${frontMatter.guestProfilePicture}`,
+  type: "guest",
+};
+const host = {
+  name: frontMatter.host,
+  pictureSrc: `/profile-images/${frontMatter.hostProfilePicture}`,
+  type: "host",
+};
+---
+
+<ul class="reset-list featured-episode-profiles">
+  <li class="featured-episode-profile">
+    <CardPerson person={host}>
+      <h2 class="card-person-name" slot="card-person-name">{host.name}</h2>
+    </CardPerson>
+  </li>
+  <li class="featured-episode-profile">
+    <CardPerson person={featuredGuest}>
+      <h2 class="card-person-name" slot="card-person-name">
+        {featuredGuest.name}
+      </h2>
+    </CardPerson>
+  </li>
+</ul>
+
+<style define:vars={{ colorPrimaryColor }}>
+  .featured-episode-profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-medium);
+    margin: var(--spacing-medium) 0;
+    padding: 0;
+  }
+
+  @media only screen and (min-width: 47.9375rem) {
+    .featured-episode-profiles {
+      flex-wrap: nowrap;
+      gap: 0;
+      max-width: 37.5rem;
+    }
+  }
+
+  .featured-episode-profile {
+    flex: 1 1 100%;
+  }
+
+  .featured-episode-profile img {
+    border: 0.4rem solid var(--colorPrimaryColor);
+    border-radius: var(--border-radius-circle);
+    height: 5rem;
+    margin-top: var(--spacing-narrow);
+    width: 5rem;
+  }
+
+  .featured-episode-profile-heading {
+    font-size: var(--typography-size-medium);
+  }
+</style>

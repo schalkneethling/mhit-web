@@ -1,0 +1,178 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { featuredEpisodeTrack, colorSecondaryColor } = Config.options;
+
+let { episode } = Astro.props;
+
+if (!episode) {
+  episode = {
+    url: featuredEpisodeTrack,
+  };
+}
+---
+
+<div class="podcast-player-default-container">
+  <audio preload="metadata">
+    <source src={`/audio/episodes/${episode.url}.mp3`} type="audio/mpeg" />
+    Your browser does not support the audio element. Please <a
+      href={`/audio/episodes/${episode.url}.mp3`}
+      download>download the episode</a
+    > instead.
+  </audio>
+
+  <div class="player-controls-container">
+    <ul class="reset-list player-controls">
+      <li>
+        <button
+          class="ghost player-control skip-backward"
+          id="skip-backward"
+          type="button"
+        >
+          <span class="visually-hidden">Skip 15 seconds backward</span>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ghost player-control skip-forward"
+          id="skip-forward"
+          type="button"
+        >
+          <span class="visually-hidden">Skip 15 seconds forward</span>
+        </button>
+      </li>
+      <li>
+        <button
+          class="ghost player-control play"
+          id="play-pause-button"
+          type="button"
+        >
+          <span class="visually-hidden">Play</span>
+        </button>
+      </li>
+    </ul>
+    <div class="time-range-container">
+      <label class="visually-hidden" for="time-range"
+        >Jump to a specific time</label
+      >
+      <input
+        class="time-range"
+        type="range"
+        id="time-range"
+        min="0"
+        max="100"
+        step="1"
+        value="0"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  const audio = document.querySelector("audio");
+  const timeRange = document.getElementById("time-range") as HTMLInputElement;
+  const playerControls = document.querySelector(".player-controls");
+
+  audio.addEventListener("loadedmetadata", () => {
+    timeRange.max = String(audio.duration);
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    timeRange.value = String(audio.currentTime);
+  });
+
+  timeRange.addEventListener("input", () => {
+    audio.currentTime = Number(timeRange.value);
+    timeRange.value = String(audio.currentTime);
+  });
+
+  playerControls.addEventListener("click", (event) => {
+    const target = event.target as HTMLButtonElement;
+    const isSkipBackwardButton = target.id === "skip-backward";
+    const isSkipForwardButton = target.id === "skip-forward";
+    const isPlayPauseButton = target.id === "play-pause-button";
+
+    if (isSkipBackwardButton) {
+      audio.currentTime = audio.currentTime - 15;
+      timeRange.value = String(audio.currentTime);
+    } else if (isSkipForwardButton) {
+      audio.currentTime = audio.currentTime + 15;
+      timeRange.value = String(audio.currentTime);
+    }
+
+    if (isPlayPauseButton && audio.paused) {
+      audio.play();
+      target.querySelector("span").textContent = "Pause";
+      target.classList.add("pause");
+    } else if (isPlayPauseButton && !audio.paused) {
+      audio.pause();
+      target.querySelector("span").textContent = "Play";
+      target.classList.remove("pause");
+    }
+  });
+
+  audio.addEventListener("ended", () => {
+    const playButton = document.getElementById("play-pause-button");
+    playButton.textContent = "Play";
+  });
+</script>
+
+<style define:vars={{ colorSecondaryColor }}>
+  .podcast-player-default-container {
+    align-items: center;
+    background-color: var(--colorSecondaryColor);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--spacing-default);
+  }
+
+  .player-controls-container {
+    align-items: center;
+    display: flex;
+    flex: 1 0 100%;
+    gap: var(--spacing-default);
+  }
+
+  .player-controls {
+    align-items: center;
+    display: flex;
+    flex: 0 0 max-content;
+    padding: 0;
+  }
+
+  .player-control::before {
+    content: "";
+    display: block;
+    height: 2rem;
+    mask-size: cover;
+    width: 2rem;
+  }
+
+  .player-control.skip-backward::before,
+  .player-control.skip-forward::before,
+  .player-control.pause::before,
+  .player-control.play::before {
+    background-color: var(--color-neutral-90);
+    mask-image: url("/icons/play.svg");
+  }
+
+  .player-control.pause::before {
+    mask-image: url("/icons/pause.svg");
+  }
+
+  .player-control.skip-backward::before {
+    mask-image: url("/icons/15s-backward.svg");
+  }
+
+  .player-control.skip-forward::before {
+    mask-image: url("/icons/15s-forward.svg");
+  }
+
+  .time-range-container {
+    flex: 1 1 80%;
+  }
+
+  .time-range {
+    width: 100%;
+  }
+</style>

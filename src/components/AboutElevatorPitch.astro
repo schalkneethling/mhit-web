@@ -1,0 +1,23 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { colorSecondaryColor, elevatorPitch } = Config.options;
+---
+
+<div class="base-container-padding elevator-pitch-container">
+  <p class="girdle elevator-pitch">{elevatorPitch}</p>
+</div>
+
+<style define:vars={{ colorSecondaryColor }}>
+  .elevator-pitch-container {
+    background-color: var(--colorSecondaryColor);
+    font-size: var(--typography-size-medium);
+    padding: var(--spacing-medium) var(--spacing-default);
+    text-align: center;
+  }
+
+  .elevator-pitch {
+    margin: auto;
+    max-width: 60rem;
+  }
+</style>

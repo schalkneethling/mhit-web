@@ -1,0 +1,46 @@
+.default-amazon::before,
+.default-apple::before,
+.default-overcast::before,
+.default-rss::before,
+.default-spotify::before,
+.default-youtube::before {
+  background-size: cover;
+  height: 40px;
+  width: 140px;
+}
+
+@media only screen and (min-width: 47.9375rem) {
+  .default-amazon::before,
+  .default-apple::before,
+  .default-overcast::before,
+  .default-rss::before,
+  .default-spotify::before,
+  .default-youtube::before {
+    height: 50px;
+    width: 175px;
+  }
+}
+
+.default-amazon::before {
+  background-image: url("/player-icon-packs/default/amazon.svg");
+}
+
+.default-apple::before {
+  background-image: url("/player-icon-packs/default/apple.svg");
+}
+
+.default-overcast::before {
+  background-image: url("/player-icon-packs/default/overcast.svg");
+}
+
+.default-rss::before {
+  background-image: url("/player-icon-packs/default/rss.svg");
+}
+
+.default-spotify::before {
+  background-image: url("/player-icon-packs/default/spotify.svg");
+}
+
+.default-youtube::before {
+  background-image: url("/player-icon-packs/default/youtube.svg");
+}

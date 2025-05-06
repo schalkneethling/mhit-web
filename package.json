@@ -1,0 +1,20 @@
+{
+  "name": "indiecaster-core",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.2.5",
+    "autoprefixer": "^10.4.17",
+    "cssnano": "^6.0.3"
+  },
+  "devDependencies": {
+    "astro-integration-kit": "^0.0.9"
+  }
+}

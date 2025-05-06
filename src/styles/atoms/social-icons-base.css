@@ -1,0 +1,7 @@
+.social-icon::before {
+  content: "";
+  display: block;
+  height: 2rem;
+  mask-size: cover;
+  width: 2rem;
+}

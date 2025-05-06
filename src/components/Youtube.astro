@@ -1,0 +1,21 @@
+---
+const { title, youtubeVideoId } = Astro.props;
+---
+
+<iframe
+  class="youtube-embed"
+  width="560"
+  height="315"
+  src={`https://www.youtube.com/embed/${youtubeVideoId}?si=rnRKF6Uhn1amJfMv`}
+  title={title}
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen></iframe>
+
+<style>
+  .youtube-embed {
+    aspect-ratio: 16 / 9;
+    border: 0;
+    height: auto;
+    width: 100%;
+  }
+</style>

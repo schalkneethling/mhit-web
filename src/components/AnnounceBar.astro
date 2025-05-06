@@ -1,0 +1,46 @@
+---
+const icon = import.meta.env.ANNOUNCEBAR_ICON;
+const linkURL = import.meta.env.ANNOUNCEBAR_TARGET_URL;
+const prose = import.meta.env.ANNOUNCEBAR_PROSE;
+---
+
+<div class="announcebar dark">
+  {
+    linkURL ? (
+      <a href={linkURL} target="_blank" rel="noopener noreferrer">
+        <span
+          class:list={["announcebar-text", { "base-icon-pseudo": icon }, icon]}
+        >
+          {prose}
+        </span>
+      </a>
+    ) : (
+      <span
+        class:list={["announcebar-text", { "base-icon-pseudo": icon }, icon]}
+      >
+        {prose}
+      </span>
+    )
+  }
+</div>
+
+<style>
+  .announcebar {
+    background-color: var(--color-petrol-90);
+    color: var(--color-petrol-10);
+    padding: var(--spacing-default);
+    text-align: center;
+  }
+
+  .announcebar a:link,
+  .announcebar a:visited {
+    color: var(--color-petrol-10);
+  }
+
+  .announcebar-text {
+    align-items: center;
+    display: inline-flex;
+    gap: var(--spacing-default);
+    max-width: max-content;
+  }
+</style>

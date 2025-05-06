@@ -1,0 +1,21 @@
+---
+import Config from "virtual:indiecaster/config";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import EpisodeSummary from "../components/EpisodeSummary.astro";
+import Subscribe from "../components/Subscribe.astro";
+import AboutElevatorPitch from "../components/AboutElevatorPitch.astro";
+
+const { metaDefaultDescription, podcastName } = Config.options;
+---
+
+<BaseLayout
+  metaDescription={metaDefaultDescription}
+  metaPageTitle={podcastName}
+>
+  <main>
+    <EpisodeSummary />
+    <Subscribe />
+    <AboutElevatorPitch />
+  </main>
+</BaseLayout>

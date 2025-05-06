@@ -1,0 +1,53 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { logo, logoHeight, logoWidth, podcastName } = Config.options;
+const logoHeightMobile = `${parseInt(logoHeight, 10) / 2}px`;
+const logoWidthMobile = `${parseInt(logoWidth, 10) / 2}px`;
+const logoHeightSmallDesktop = `${parseInt(logoHeight, 10) / 1.5}px`;
+const logoWidthSmallDesktop = `${parseInt(logoWidth, 10) / 1.5}px`;
+---
+
+<a href="/">
+  <img
+    class="logo"
+    src={`/${logo}`}
+    height={logoHeight}
+    width={logoWidth}
+    alt={`${podcastName} logo`}
+  />
+</a>
+
+<style
+  define:vars={{
+    logoHeight,
+    logoHeightMobile,
+    logoHeightSmallDesktop,
+    logoWidth,
+    logoWidthMobile,
+    logoWidthSmallDesktop,
+  }}
+>
+  .logo {
+    display: block;
+    height: var(--logoHeightMobile);
+    margin: var(--spacing-medium) auto;
+    width: var(--logoWidthMobile);
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .logo {
+      height: var(--logoHeightSmallDesktop);
+      margin: var(--spacing-medium) auto;
+      width: var(--logoWidthSmallDesktop);
+    }
+  }
+
+  @media only screen and (min-width: 83.6875rem) {
+    .logo {
+      height: var(--logoHeight);
+      margin: var(--spacing-medium) auto;
+      width: var(--logoWidth);
+    }
+  }
+</style>

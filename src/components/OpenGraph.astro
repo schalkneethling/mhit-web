@@ -1,0 +1,13 @@
+---
+import Config from "virtual:indiecaster/config";
+
+const { domain, metaDefaultDescription, metaLocale, podcastName } =
+  Config.options;
+---
+
+<meta property="og:url" content={`https://${domain}`} />
+<meta property="og:title" content={podcastName} />
+<meta property="og:description" content={metaDefaultDescription} />
+<meta property="og:locale" content={metaLocale} />
+<meta property="og:image" content={`https://${domain}/social-share.png`} />
+<meta property="twitter:card" content="summary_large_image" />

@@ -1,0 +1,59 @@
+---
+import Config from "virtual:indiecaster/config";
+
+import AnnounceBar from "../components/AnnounceBar.astro";
+import EpisodeProfiles from "../components/EpisodeProfiles.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import HeadDefault from "../components/HeadDefault.astro";
+import DefaultHeroPlayer from "../components/DefaultHeroPlayer.astro";
+import MetaIcons from "../components/MetaIcons.astro";
+import OpenGraph from "../components/OpenGraph.astro";
+import Subscribe from "../components/Subscribe.astro";
+import ThemeProvider from "../components/ThemeProvider.astro";
+import Youtube from "../components/Youtube.astro";
+
+const { frontmatter } = Astro.props;
+const showAnnounceBar = import.meta.env.ANNOUNCEBAR_ENABLED === "true";
+const { metaLanguage, podcastName } = Config.options;
+const { description, title, youtube } = frontmatter;
+const episode = {
+  artwork: frontmatter.episodeArtwork.src,
+  url: frontmatter.episodeAudio,
+};
+---
+
+<!doctype html>
+<html lang={metaLanguage}>
+  <head>
+    <HeadDefault
+      metaDescription={description}
+      metaPageTitle={title}
+      podcastName={podcastName}
+    />
+    <OpenGraph />
+    <MetaIcons />
+  </head>
+  <body class="episode-page">
+    <ThemeProvider>
+      {showAnnounceBar && <AnnounceBar />}
+      <Header />
+      <main class="girdle episode-content-container">
+        <DefaultHeroPlayer episode={episode} />
+        <h1>{title}</h1>
+        <EpisodeProfiles frontMatter={frontmatter} />
+        {
+          youtube && (
+            <Youtube
+              title="IndieCaster Promo - A Complete Website Toolkit For Indie Podcasters"
+              youtubeVideoId={youtube}
+            />
+          )
+        }
+        <slot />
+      </main>
+      <Subscribe />
+      <Footer />
+    </ThemeProvider>
+  </body>
+</html>

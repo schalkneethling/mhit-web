@@ -1,0 +1,75 @@
+---
+import Config from "virtual:indiecaster/config";
+
+import ButtonPrimary from "./ButtonPrimary.astro";
+import EpisodeProfilesFeatured from "./EpisodeProfilesFeatured.astro";
+
+const { showCta } = Astro.props;
+const { featuredEpisodeTitle, featuredEpisodeSummary, featuredEpisodeURL } =
+  Config.options;
+---
+
+<article class="featured-episode-summary base-container-padding">
+  <h2 class="featured-episode-summary-heading">{featuredEpisodeTitle}</h2>
+  <EpisodeProfilesFeatured />
+  <p class="featured-episode-summary-text">{featuredEpisodeSummary}</p>
+  {
+    showCta && (
+      <ButtonPrimary
+        centred={true}
+        label="Episode Details"
+        type="link"
+        url={`/episodes/${featuredEpisodeURL}`}
+      />
+    )
+  }
+</article>
+
+<style>
+  @media only screen and (min-width: 47.9375rem) {
+    .featured-episode-summary.base-container-padding {
+      margin: auto;
+      max-width: 48rem;
+      padding: var(--spacing-medium);
+    }
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .featured-episode-summary.base-container-padding {
+      max-width: 100ch;
+    }
+  }
+
+  .featured-episode-summary-heading {
+    font-size: var(--typography-size-large);
+    font-weight: normal;
+    margin-bottom: var(--spacing-default);
+    text-align: center;
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .featured-episode-summary-heading {
+      margin: auto;
+      margin-bottom: var(--spacing-medium);
+      max-width: 40ch;
+    }
+  }
+
+  @media only screen and (min-width: 83.6875rem) {
+    .featured-episode-summary-heading {
+      font-size: var(--typography-size-xl);
+    }
+  }
+
+  .featured-episode-summary-text {
+    font-size: var(--typography-size-small-medium);
+    margin-top: var(--spacing-default);
+    text-align: center;
+  }
+
+  @media only screen and (min-width: 63.9375rem) {
+    .featured-episode-summary-text {
+      margin-top: var(--spacing-medium);
+    }
+  }
+</style>
